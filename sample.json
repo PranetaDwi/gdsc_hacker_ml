@@ -1,0 +1,9 @@
+{
+    "usia" :30,
+    "gender": "wanita",
+    "sistol" : 130,
+    "diastol" : 80,
+    "nadi" : 120, 
+    "tb" : 170,
+    "bb" : 50
+}

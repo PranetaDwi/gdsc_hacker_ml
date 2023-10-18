@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body style="margin:30px">
+    <div class="card mb-3 mx-auto" style="max-width: 600px; align-items: center;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://images.unsplash.com/photo-1618688862225-ac941a9da58f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" class="img-fluid rounded-start"  alt="..." style="height: 100%;">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Form Fitness Prediction</h5>
+              <form method="post" action="/submit" id="myForm">
+                <div class="form-row" >
+                  <div class="form-group col-md-12" style="padding: 10px;" >
+                    <label>Usia</label>
+                    <input type="text" class="form-control" placeholder="40" name="usia" id="usia">
+                  </div>
+                  <div class="form-group col-md-4" style="padding: 8px;">
+                    <label>Gender</label>
+                    <select class="custom-select" name="gender" id="gender">
+                        <option selected>Pilih Gender</option>
+                        <option value="1">Pria</option>
+                        <option value="0">Wanita</option>
+                      </select>
+                  </div>
+                  <div class="form-group col-md-12" style="padding: 8px;">
+                    <label>Sistol</label>
+                    <input type="text" class="form-control" placeholder="120" name="sistol" id="sistol">
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12" style="padding: 6px;">
+                      <label>Diastol</label>
+                      <input type="text" class="form-control" placeholder="40" name="diastol" id="diastol">
+                    </div>
+                    <div class="form-group col-md-12" style="padding: 6px;">
+                      <label>Nadi</label>
+                      <input type="text" class="form-control" placeholder="120" name="nadi" id="nadi">
+                    </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12" style="padding: 6px;">
+                    <label>Tinggi Badan</label>
+                    <input type="text" class="form-control" placeholder="160" name="tb" id="tb">
+                  </div>
+                  <div class="form-group col-md-12" style="padding: 6px;">
+                    <label>Berat Badan</label>
+                    <input type="text" class="form-control" placeholder="40" name="bb" id="bb">
+                  </div>
+                </div>
+                <input type="submit" name="button" value="click">
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+    <!-- Masukkan skrip JavaScript di bawah ini -->
+    <script>
+      document.getElementById('myForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const form = new FormData(this);
+          const formData = {};
+          for (let entry of form.entries()) {
+              formData[entry[0]] = entry[1];
+          }
+
+          fetch('/submit', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+          })
+          .then(response => response.text())
+          .then(data => {
+              console.log(data);
+          })
+          .catch(error => console.error('Error:', error));
+      });
+  </script>
+</html>
